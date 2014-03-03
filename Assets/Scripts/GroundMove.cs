@@ -14,8 +14,8 @@ public class GroundMove : MonoBehaviour {
 			return;		
 		}
 		transform.Translate (Vector3.right*speed*Time.deltaTime);
-		if(transform.position.x >= 15){
-			transform.position = new Vector3(-15,transform.position.y,transform.position.z);
+		if(transform.position.x >= 7){
+			transform.position = new Vector3(-7.323999f,transform.position.y,transform.position.z);
 		}
 	}
 }

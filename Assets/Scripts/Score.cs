@@ -2,14 +2,15 @@
 using System.Collections;
 
 public class Score : MonoBehaviour {
+	public static Score instance;
 	UILabel label;
 	// Use this for initialization
 	void Start () {
+		instance = this;
 		label = GetComponent<UILabel>();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		label.text = "Score:" + BirdControll.score;
+
+	public void ChangeScore(int Score){
+		label.text = "Score:" + Score;
 	}
 }

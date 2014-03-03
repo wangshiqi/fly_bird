@@ -65,6 +65,7 @@ public class BirdControll : MonoBehaviour {
 			if(GameDataManager.instance.gameData.PlayerScore < score){
 				GameDataManager.instance.gameData.PlayerScore = score;
 				GameDataManager.instance.Save();
+				MaxScore.instance.ChangeScore(score);
 			}
 			if(!gameOver){
 				audio.clip = zhuangqiang;
@@ -77,6 +78,7 @@ public class BirdControll : MonoBehaviour {
 		}else if (col.gameObject.tag == "score") {
 			if(!isAddScore){
 				score ++;
+				Score.instance.ChangeScore(score);
 				isAddScore = true;
 			}
 		}

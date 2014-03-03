@@ -2,14 +2,17 @@
 using System.Collections;
 
 public class MaxScore : MonoBehaviour {
+	public static MaxScore instance;
 	UILabel label;
+
 	// Use this for initialization
 	void Start () {
+		instance = this;
 		label = GetComponent<UILabel>();
-	}
-	
-	// Update is called once per frame
-	void Update () {
 		label.text = "MaxScore:" + GameDataManager.instance.gameData.PlayerScore.ToString();
+	}
+
+	public void ChangeScore(int Score){
+		label.text = "MaxScore:" + Score.ToString();
 	}
 }

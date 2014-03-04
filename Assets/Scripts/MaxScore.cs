@@ -9,10 +9,10 @@ public class MaxScore : MonoBehaviour {
 	void Start () {
 		instance = this;
 		label = GetComponent<UILabel>();
-		label.text = "MaxScore:" + GameDataManager.instance.gameData.PlayerScore.ToString();
+		label.text = "Best:" + GameDataManager.instance.gameData.PlayerScore.ToString();
 	}
 
 	public void ChangeScore(int Score){
-		label.text = "MaxScore:" + Score.ToString();
+		label.text = "Best:" + Score.ToString();
 	}
 }

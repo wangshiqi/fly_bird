@@ -11,6 +11,6 @@ public class Score : MonoBehaviour {
 	}
 
 	public void ChangeScore(int Score){
-		label.text = "Score:" + Score;
+		label.text = Score.ToString();
 	}
 }

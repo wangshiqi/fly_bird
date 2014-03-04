@@ -4,8 +4,8 @@ using System.Collections;
 public class ZhangaiMove : MonoBehaviour {
 
 	// Use this for initialization
-	float yMax = 2;
-	float yMin = -2;
+	float yMax = 2.5f;
+	float yMin = -1;
 	void Start () {
 	
 	}
@@ -15,7 +15,7 @@ public class ZhangaiMove : MonoBehaviour {
 		if (BirdControll.gameOver) {
 			return;		
 		}
-		transform.Translate (Vector3.right*GroundMove.speed*Time.deltaTime);
+		transform.Translate (Vector3.right*3.5f*Time.deltaTime);
 		if(transform.position.x >= 5){
 			float y = Random.Range(yMin,yMax);
 			transform.position = new Vector3(-10,y,0);

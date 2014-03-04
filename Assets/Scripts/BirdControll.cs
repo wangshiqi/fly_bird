@@ -5,14 +5,14 @@ public class BirdControll : MonoBehaviour {
 	public static bool gameOver = false;
 	public static bool isStart = false;
 	public static int score = 0;
-	public GameObject window;
+	//public GameObject window;
 	public GameObject teach;
 	public AudioClip zhuangqiang;
 	public AudioClip click;
 	public GameObject zhangAi;
 	bool isAddScore = false;
 	bool isDrop = false;
-	float jumpForce = 400.0f;
+	float jumpForce = 380.0f;
 	Rigidbody2D rb;
 
 	void Awake () {
@@ -21,7 +21,7 @@ public class BirdControll : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		Screen.fullScreen = !Screen.fullScreen;
-		NGUITools.SetActive (window,false);
+		//NGUITools.SetActive (window,false);
 		rb = rigidbody2D;
 		rb.Sleep ();
 	}
@@ -43,7 +43,7 @@ public class BirdControll : MonoBehaviour {
 			audio.clip = click;
 			audio.Play();
 			//transform.rotation = rot;
-			rb.AddForce (Vector2.up*jumpForce - rb.velocity * 57);
+			rb.AddForce (Vector2.up*jumpForce - rb.velocity * 55);
 		}
 		if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began) {
 			if(!isStart){
@@ -56,7 +56,7 @@ public class BirdControll : MonoBehaviour {
 			}
 			audio.clip = click;
 			audio.Play();
-			rb.AddForce (Vector2.up*jumpForce - rb.velocity * 57);
+			rb.AddForce (Vector2.up*jumpForce - rb.velocity * 55);
 		}
 	}
 
@@ -94,6 +94,6 @@ public class BirdControll : MonoBehaviour {
 		yield return new WaitForSeconds (0.5f);
 		rb.WakeUp();
 		yield return new WaitForSeconds (1);
-		NGUITools.SetActive (window,true);
+		//NGUITools.SetActive (window,true);
 	}
 }

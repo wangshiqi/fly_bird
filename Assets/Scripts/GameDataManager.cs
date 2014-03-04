@@ -33,6 +33,7 @@ public class GameDataManager:MonoBehaviour
 	
 	public void Awake()
 	{
+		Screen.sleepTimeout = SleepTimeout.NeverSleep;
 		DontDestroyOnLoad (gameObject);
 		gameData = new GameData();
 		instance = this;

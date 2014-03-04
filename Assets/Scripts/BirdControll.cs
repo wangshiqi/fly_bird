@@ -5,13 +5,12 @@ public class BirdControll : MonoBehaviour {
 	public static bool gameOver = false;
 	public static bool isStart = false;
 	public static int score = 0;
-	//public GameObject window;
+	public GameObject reStart;
 	public GameObject teach;
 	public AudioClip zhuangqiang;
 	public AudioClip click;
 	public GameObject zhangAi;
 	bool isAddScore = false;
-	bool isDrop = false;
 	float jumpForce = 380.0f;
 	Rigidbody2D rb;
 
@@ -21,15 +20,21 @@ public class BirdControll : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		Screen.fullScreen = !Screen.fullScreen;
-		//NGUITools.SetActive (window,false);
+		NGUITools.SetActive (reStart,false);
 		rb = rigidbody2D;
 		rb.Sleep ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (gameOver) {
-			return;	
+		if(gameOver){
+			if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began || Input.GetKeyDown (KeyCode.A)) {
+				gameOver = false;
+				score = 0;
+				isStart = false;
+				Application.LoadLevel (1);	
+				return;
+			}
 		}
 		if (Input.GetKeyDown (KeyCode.A)) {
 			if(!isStart){
@@ -94,6 +99,6 @@ public class BirdControll : MonoBehaviour {
 		yield return new WaitForSeconds (0.5f);
 		rb.WakeUp();
 		yield return new WaitForSeconds (1);
-		//NGUITools.SetActive (window,true);
+		NGUITools.SetActive (reStart,true);
 	}
 }

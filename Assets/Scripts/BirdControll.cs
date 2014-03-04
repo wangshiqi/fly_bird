@@ -11,6 +11,7 @@ public class BirdControll : MonoBehaviour {
 	public AudioClip click;
 	public GameObject zhangAi;
 	bool isAddScore = false;
+	bool canRestart = false;
 	float jumpForce = 380.0f;
 	Rigidbody2D rb;
 
@@ -27,14 +28,18 @@ public class BirdControll : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(gameOver){
-			if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began || Input.GetKeyDown (KeyCode.A)) {
-				gameOver = false;
-				score = 0;
-				isStart = false;
-				Application.LoadLevel (1);	
-				return;
-			}
+		if (gameOver) {
+			if(canRestart){
+				if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began || Input.GetKeyDown (KeyCode.A)) {
+					score = 0;
+					isStart = false;
+					canRestart = false;
+					gameOver = false;
+					Application.LoadLevel (1);	
+					return;
+				}
+			}	
+			return;
 		}
 		if (Input.GetKeyDown (KeyCode.A)) {
 			if(!isStart){
@@ -99,6 +104,7 @@ public class BirdControll : MonoBehaviour {
 		yield return new WaitForSeconds (0.5f);
 		rb.WakeUp();
 		yield return new WaitForSeconds (1);
+		canRestart = true;
 		NGUITools.SetActive (reStart,true);
 	}
 }

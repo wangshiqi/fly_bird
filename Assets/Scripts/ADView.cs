@@ -3,13 +3,15 @@ using System.Collections;
 
 public class ADView :MonoBehaviour
 {
-	private ADBannerView banner = null;
+	public ADBannerView banner = null;
+	public bool isBannerLoaded = false;
 
 	void Start()
 	{
-		banner = new ADBannerView(ADBannerView.Type.Banner, ADBannerView.Layout.Top);
+		banner = new ADBannerView(ADBannerView.Type.Banner, ADBannerView.Layout.Bottom);
 		ADBannerView.onBannerWasClicked += OnBannerClicked;
 		ADBannerView.onBannerWasLoaded  += OnBannerLoaded;
+		Object.DontDestroyOnLoad(transform.gameObject);
 	}
 
 	void OnBannerClicked()
@@ -20,6 +22,15 @@ public class ADView :MonoBehaviour
 	void OnBannerLoaded()
 	{
 		Debug.Log("Loaded!\n");
-		banner.visible = true;
+		isBannerLoaded = true;
+	}
+
+	public void showBanner(bool isshow)
+	{
+		Debug.Log("isBannerLoaded\n"+isBannerLoaded);
+		if(isBannerLoaded)
+		{
+			banner.visible = isshow;
+		}
 	}
 }

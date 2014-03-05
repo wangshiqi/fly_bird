@@ -10,6 +10,7 @@ public class BirdControll : MonoBehaviour {
 	public AudioClip zhuangqiang;
 	public AudioClip click;
 	public GameObject zhangAi;
+	public ADView banner;
 	bool isAddScore = false;
 	bool canRestart = false;
 	float jumpForce = 340.0f;
@@ -35,7 +36,8 @@ public class BirdControll : MonoBehaviour {
 					isStart = false;
 					canRestart = false;
 					gameOver = false;
-					Application.LoadLevel (1);	
+					Application.LoadLevel (1);
+					banner.showBanner(false);
 					return;
 				}
 			}	
@@ -84,6 +86,10 @@ public class BirdControll : MonoBehaviour {
 			}
 			gameOver = true; 
 			StartCoroutine(ShowWindow());
+			if(!banner){
+				banner = GameObject.FindGameObjectWithTag("ADBanner").GetComponent<ADView>();
+			}
+			banner.showBanner(true);
 		}else if (col.gameObject.tag == "score") {
 			if(!isAddScore){
 				score ++;

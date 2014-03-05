@@ -39,7 +39,7 @@ public class BirdControll : MonoBehaviour {
 					isStart = false;
 					canRestart = false;
 					gameOver = false;
-					Application.LoadLevel (2);	
+					Application.LoadLevel (1);	
 					banner.showBanner(false);
 					return;
 				}

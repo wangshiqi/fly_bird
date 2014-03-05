@@ -11,7 +11,6 @@ public class BirdControll : MonoBehaviour {
 	public AudioClip click;
 	public GameObject zhangAi;
 	public GameObject fire;
-	public GameObject firePos;
 	bool isAddScore = false;
 	bool canRestart = false;
 	bool isUp = true;
@@ -23,6 +22,7 @@ public class BirdControll : MonoBehaviour {
 	}
 	// Use this for initialization
 	void Start () {
+		fire.SetActive(false);
 		Screen.fullScreen = !Screen.fullScreen;
 		NGUITools.SetActive (reStart,false);
 		rb = rigidbody2D;
@@ -38,7 +38,7 @@ public class BirdControll : MonoBehaviour {
 					isStart = false;
 					canRestart = false;
 					gameOver = false;
-					Application.LoadLevel (1);	
+					Application.LoadLevel (2);	
 					return;
 				}
 			}	
@@ -58,8 +58,8 @@ public class BirdControll : MonoBehaviour {
 			}
 			audio.clip = click;
 			audio.Play();
-			Instantiate(fire,firePos.transform.position,Quaternion.identity);
 			rb.AddForce (Vector2.up*jumpForce - rb.velocity * 54);
+			StartCoroutine(Fire());
 		}
 		if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began) {
 			if(!isStart){
@@ -73,6 +73,7 @@ public class BirdControll : MonoBehaviour {
 			audio.clip = click;
 			audio.Play();
 			rb.AddForce (Vector2.up*jumpForce - rb.velocity * 54);
+			StartCoroutine(Fire());
 		}
 	}
 
@@ -119,6 +120,12 @@ public class BirdControll : MonoBehaviour {
 			transform.Translate (Vector3.down*Time.deltaTime,Space.World);	
 		}
 
+	}
+
+	IEnumerator Fire(){
+		fire.SetActive(true);
+		yield return new WaitForSeconds (0.3f);
+		fire.SetActive(false);
 	}
 
 	IEnumerator ShowWindow(){

@@ -12,7 +12,7 @@ public class BirdControll : MonoBehaviour {
 	public GameObject zhangAi;
 	bool isAddScore = false;
 	bool canRestart = false;
-	float jumpForce = 380.0f;
+	float jumpForce = 340.0f;
 	Rigidbody2D rb;
 
 	void Awake () {
@@ -52,8 +52,7 @@ public class BirdControll : MonoBehaviour {
 			}
 			audio.clip = click;
 			audio.Play();
-			//transform.rotation = rot;
-			rb.AddForce (Vector2.up*jumpForce - rb.velocity * 55);
+			rb.AddForce (Vector2.up*jumpForce - rb.velocity * 54);
 		}
 		if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began) {
 			if(!isStart){
@@ -66,7 +65,7 @@ public class BirdControll : MonoBehaviour {
 			}
 			audio.clip = click;
 			audio.Play();
-			rb.AddForce (Vector2.up*jumpForce - rb.velocity * 55);
+			rb.AddForce (Vector2.up*jumpForce - rb.velocity * 54);
 		}
 	}
 

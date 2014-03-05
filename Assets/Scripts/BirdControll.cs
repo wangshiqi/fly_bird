@@ -5,6 +5,7 @@ public class BirdControll : MonoBehaviour {
 	public static bool gameOver = false;
 	public static bool isStart = false;
 	public static int score = 0;
+	public bool canControll;
 	public GameObject reStart;
 	public GameObject teach;
 	public AudioClip zhuangqiang;
@@ -12,6 +13,8 @@ public class BirdControll : MonoBehaviour {
 	public GameObject zhangAi;
 	public GameObject fire;
 	public ADView banner;
+	public float maxY = 1.2f;
+	public float minY = 0.2f;
 	bool isAddScore = false;
 	bool canRestart = false;
 	bool isUp = true;
@@ -23,11 +26,14 @@ public class BirdControll : MonoBehaviour {
 	}
 	// Use this for initialization
 	void Start () {
-		fire.SetActive(false);
 		Screen.fullScreen = !Screen.fullScreen;
-		NGUITools.SetActive (reStart,false);
 		rb = rigidbody2D;
 		rb.Sleep ();
+		if(!canControll){
+			return;
+		}
+		fire.SetActive(false);
+		NGUITools.SetActive (reStart,false);
 	}
 	
 	// Update is called once per frame
@@ -48,6 +54,9 @@ public class BirdControll : MonoBehaviour {
 		}
 		if(!isStart){
 			AutoMove();
+		}
+		if(!canControll){
+			return;
 		}
 		if (Input.GetKeyDown (KeyCode.A)) {
 			if(!isStart){
@@ -115,9 +124,9 @@ public class BirdControll : MonoBehaviour {
 
 	void AutoMove(){
 		rb.Sleep ();
-		if(transform.position.y >= 1.2f){
+		if(transform.position.y >= maxY){
 			isUp = false;
-		}else if(transform.position.y <= 0.2f){
+		}else if(transform.position.y <= minY){
 			isUp = true;
 		}
 		if (isUp) {

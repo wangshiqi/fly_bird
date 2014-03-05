@@ -10,9 +10,12 @@ public class BirdControll : MonoBehaviour {
 	public AudioClip zhuangqiang;
 	public AudioClip click;
 	public GameObject zhangAi;
+	public GameObject fire;
+	public GameObject firePos;
 	bool isAddScore = false;
 	bool canRestart = false;
-	float jumpForce = 340.0f;
+	bool isUp = true;
+	float jumpForce = 360.0f;
 	Rigidbody2D rb;
 
 	void Awake () {
@@ -41,6 +44,9 @@ public class BirdControll : MonoBehaviour {
 			}	
 			return;
 		}
+		if(!isStart){
+			AutoMove();
+		}
 		if (Input.GetKeyDown (KeyCode.A)) {
 			if(!isStart){
 				for (int i = 1; i < 4; i++) {
@@ -52,6 +58,7 @@ public class BirdControll : MonoBehaviour {
 			}
 			audio.clip = click;
 			audio.Play();
+			Instantiate(fire,firePos.transform.position,Quaternion.identity);
 			rb.AddForce (Vector2.up*jumpForce - rb.velocity * 54);
 		}
 		if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began) {
@@ -97,6 +104,21 @@ public class BirdControll : MonoBehaviour {
 		if (col.gameObject.tag == "score") {
 			isAddScore = false;
 		}
+	}
+
+	void AutoMove(){
+		rb.Sleep ();
+		if(transform.position.y >= 1.2f){
+			isUp = false;
+		}else if(transform.position.y <= 0.2f){
+			isUp = true;
+		}
+		if (isUp) {
+			transform.Translate (Vector3.up*1.7f*Time.deltaTime,Space.World);	
+		}else{
+			transform.Translate (Vector3.down*Time.deltaTime,Space.World);	
+		}
+
 	}
 
 	IEnumerator ShowWindow(){
